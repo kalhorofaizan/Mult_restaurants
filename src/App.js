@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux'
+import {Add} from './redux/action';
+import Deshboard from "./pages/Deshboard";
+const  mapDispatchToProps=(dispatch)=>({
+  Add:()=>{dispatch(Add())}
+});
+const mapStateToProps=(state)=>({
+  number:state.base.number
+});
 
-function App() {
+function App(props) {
+  console.log(props.number);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Deshboard/>
     </div>
   );
 }
 
-export default App;
+export default connect(mapStateToProps,mapDispatchToProps)(App);
