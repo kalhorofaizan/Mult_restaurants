@@ -7,7 +7,7 @@ const  mapDispatchToProps=(dispatch)=>({
   Add:()=>{dispatch(Add())}
 });
 const mapStateToProps=(state)=>({
-  number:state.base.number
+  number:state.user.number
 });
 
 function App(props) {

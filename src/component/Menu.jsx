@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -7,58 +7,61 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import HomeIcon from '@material-ui/icons/Home';
+import RestaurantIcon from  '@material-ui/icons/Restaurant'
 import {Link} from 'react-router-dom'
+import LinkRouter from '@material-ui/core/Link'
 import Header from "./Header";
 
-const useStyles = makeStyles({
-    list: {
-        width: 250,
-    },
-    fullList: {
-        width: 'auto',
-    },
-});
-
-export default function TemporaryDrawer(props) {
-    const classes = useStyles();
-    const [state, setState] = React.useState({
-        left: false,
-    });
-
-    const toggleDrawer = (side, open) => event => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
+export default class TemporaryDrawe extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            open:false
         }
+    }
 
-        setState({ ...state, [side]: open });
+
+     toggleDrawer = (open) => {
+        console.log('hh');
+        this.setState({
+            open:open
+        });
+
     };
 
-    const sideList = side => (
+    sideList = side => (
         <div
-            className={classes.list}
+           style={{width:250}}
             role="presentation"
-            onClick={toggleDrawer(side, false)}
-            onKeyDown={toggleDrawer(side, false)}
+            onClick={()=>this.toggleDrawer( false)}
+            onKeyDown={()=>this.toggleDrawer( false)}
         >
             <List>
-                <ListItem button key={1} >
-                    <ListItemIcon><InboxIcon/></ListItemIcon>
-                    <ListItemText>Inbox</ListItemText>
-                </ListItem>
-                <ListItem button  key={2} >
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
-                        <ListItemText>Inbox</ListItemText>
-                </ListItem>
+                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/'} >
+                    <ListItem button   key={1} >
+                        <ListItemIcon><HomeIcon/></ListItemIcon>
+                        <ListItemText>Home</ListItemText>
+                    </ListItem >
+                </LinkRouter>
+                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/restaurants'} >
+                    <ListItem button  key={2} >
+                            <ListItemIcon><RestaurantIcon/></ListItemIcon>
+                            <ListItemText>Restaurants</ListItemText>
+                    </ListItem>
+                </LinkRouter>
             </List>
         </div>
     );
-    return (
-        <div>
-            <Header showmenu={toggleDrawer('left',true)}   />
-            <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-                {sideList('left')}
-            </Drawer>
-        </div>
-    );
+    render() {
+        return (
+            <div>
+                <Header showmenu={()=>this.toggleDrawer(true)}   />
+                <Drawer open={this.state.open} onClose={()=>this.toggleDrawer( false)}>
+                    {this.sideList('left')}
+                </Drawer>
+            </div>
+        );
+    }
+
 }

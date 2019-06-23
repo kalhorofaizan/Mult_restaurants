@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-
+import {Container} from '@material-ui/core'
 class Home extends Component {
     render() {
         return (
-            <div>
+            <Container>
                 Home
-            </div>
+            </Container>
         );
     }
 }

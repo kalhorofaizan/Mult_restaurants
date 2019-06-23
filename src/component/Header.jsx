@@ -25,7 +25,7 @@ export default function Header(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} onClick={props.showmenu} color="inherit" aria-label="Menu">
+                    <IconButton edge="start" className={classes.menuButton} onClick={()=>{ console.log('hi');  props.showmenu(true)}} color="inherit" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
