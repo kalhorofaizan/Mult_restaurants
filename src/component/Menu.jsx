@@ -38,13 +38,13 @@ export default class TemporaryDrawe extends Component{
             onKeyDown={()=>this.toggleDrawer( false)}
         >
             <List>
-                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/'} >
+                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/dashboard/'} >
                     <ListItem button   key={1} >
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText>Home</ListItemText>
                     </ListItem >
                 </LinkRouter>
-                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/restaurants'} >
+                <LinkRouter color={'inherit'} underline={'none'} component={Link} to={'/dashboard/restaurants'} >
                     <ListItem button  key={2} >
                             <ListItemIcon><RestaurantIcon/></ListItemIcon>
                             <ListItemText>Restaurants</ListItemText>

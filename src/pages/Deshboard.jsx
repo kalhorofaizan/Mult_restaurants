@@ -8,13 +8,13 @@ class Deshboard extends Component {
     render() {
         return (
             <div>
-                    <Router >
-                        <Menu/>
-                        <Switch>
-                            <Route exact path={'/'} component={Home}  />
-                            <Route  path={'/restaurants'} component={Restaurant}  />
-                        </Switch>
-                    </Router>
+                <Router >
+                    <Menu/>
+                    <Switch>
+                        <Route exact path={'/dashboard/'} component={Home}  />
+                        <Route  path={'/dashboard/restaurants'} component={Restaurant}  />
+                    </Switch>
+                </Router>
             </div>
         );
     }
