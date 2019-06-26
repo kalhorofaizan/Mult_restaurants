@@ -5,24 +5,53 @@ import image from './edgar-castrejon-1SPu0KT-Ejg-unsplash.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Input from "@material-ui/core/Input";
-
+import firebase from '../firebaseConfig'
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 function UserSignup() {
         const classes=Style();
     const [email,setEmail] = useState('');
+    const [fullname,setFullname] = useState('');
+    const [age,setAge] = useState(0);
+    const [gender,setGender] = useState('male');
+    const [city,setCity] = useState('');
+    const [country,setCountry] = useState('');
+    const [password,setPassword] = useState('');
+    const [show,setShow] =useState(false);
+    const [loading , setLoding] =useState(false);
+        const submit=()=>{
+            const userdetail=firebase.firestore().collection('userDetail');
+                if (email!=='' && fullname!=='' && age!==0 && gender!=='' && city!=='' && country!=='' && password!=='' ){
+                    setLoding(true);
+                    firebase.auth().createUserWithEmailAndPassword(email,password).then((re)=>{
+                        userdetail.add({
+                           id:re.user.uid,
+                           fullname:fullname,
+                           age:age,
+                           gender:gender,
+                           city:city,
+                           country:country,
+                        }).then(()=>{
+                            setLoding(false);
+                        });
+
+                    });
+                    setShow(false);
+
+                }  else {
+                    setShow(true);
+                }
+
+        };
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return (
             <Grid  container component={'main'}  className={classes.root} >
@@ -41,6 +70,8 @@ function UserSignup() {
                                        margin={'normal'}
                                        required id="fullname"
                                        fullWidth
+                                       value={fullname}
+                                       onChange={(e)=>{setFullname(e.target.value)}}
                                        label="Full name"
                                        name="Full name"
                                        autoComplete="name"
@@ -63,6 +94,8 @@ function UserSignup() {
                                                margin={'normal'}
                                                required id="age"
                                                fullWidth
+                                               value={age}
+                                               onChange={(e)=>{setAge(e.target.value)}}
                                                label="Age"
                                                name="age"
                                                autoFocus/>
@@ -71,14 +104,16 @@ function UserSignup() {
                                     <FormControl fullWidth className={classes.formcontrol}>
                                         <InputLabel htmlFor="gender-helper">Gender</InputLabel>
                                         <Select
+                                            value={gender}
+                                            onChange={(e)=>{setGender(e.target.value)}}
                                             input={<Input name="Gender" id="gender-helper" />}
                                         >
-                                            <MenuItem value="">
+                                            <MenuItem value="none">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem >Male</MenuItem>
-                                            <MenuItem >Female</MenuItem>
-                                            <MenuItem >Other</MenuItem>
+                                            <MenuItem value={"male"}  >Male</MenuItem>
+                                            <MenuItem value={"femaile"} >Female</MenuItem>
+                                            <MenuItem value={"other"} >Other</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -88,6 +123,8 @@ function UserSignup() {
                                     <Grid item xs >
                                         <TextField variant={'outlined'}
                                                    margin={'normal'}
+                                                   value={country}
+                                                   onChange={(e)=>{setCountry(e.target.value)}}
                                                    required id="country"
                                                    fullWidth
                                                    label="Country"
@@ -98,6 +135,8 @@ function UserSignup() {
                                 <Grid item xs style={{marginLeft:3}}>
                                     <TextField variant={'outlined'}
                                                margin={'normal'}
+                                               value={city}
+                                               onChange={(e)=>{setCity(e.target.value)}}
                                                required id="city"
                                                fullWidth
                                                label="City"
@@ -106,6 +145,8 @@ function UserSignup() {
                                 </Grid>
                             </Grid>
                             <TextField
+                                value={password}
+                                onChange={(e)=>{setPassword(e.target.value)}}
                                 variant="outlined"
                                 margin="normal"
                                 required
@@ -116,13 +157,17 @@ function UserSignup() {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            <Button
-                                type="submit"
+                            <Button onClick={()=>{
+                                submit()
+                            }}
                                 fullWidth
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
-                            >Sign In</Button>
+                            > {loading ?   <CircularProgress size={24} color={"secondary"}  />:''}  Sign In</Button>
+                            <Typography style={{
+                                color:'red',
+                            }}  hidden={!show} >All field is requird</Typography>
                             <Grid container >
                                 <Grid item>
                                     <Link href="#" variant="body2">
@@ -169,5 +214,7 @@ const Style=makeStyles(theme=>({
 
 
 }));
+
+
 
 export default UserSignup;
