@@ -1,22 +1,18 @@
-import React, {Component, useState} from 'react';
+import React,{useState} from 'react';
 import {Grid,CssBaseline} from '@material-ui/core'
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import image from './mgg-vitchakorn-vBOxsZrfiCw-unsplash.jpg';
+import image from './rew.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-
-function UserLogin() {
+function ResLogin() {
     const classes=Style();
     const [email,setEmail] = useState('');
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return (
         <Grid  container component={'main'}  className={classes.root} >
             <CssBaseline/>
@@ -50,7 +46,7 @@ function UserLogin() {
                             label="Password"
                             type="password"
                             id="password"
-
+                            autoComplete="current-password"
                         />
                         <Button
                             type="submit"
@@ -106,4 +102,4 @@ const Style=makeStyles(theme=>({
     }
 }));
 
-export default UserLogin;
+export default ResLogin;

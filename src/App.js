@@ -7,6 +7,8 @@ import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
 import Landing from "./pages/Landing";
+import ResSignup from "./pages/ResSignup";
+import ResLogin from "./pages/ResLogin";
 const  mapDispatchToProps=(dispatch)=>({
   Add:()=>{dispatch(Add())}
 });
@@ -23,6 +25,8 @@ function App(props) {
             <Route path={'/Userlogin'} component={UserLogin} />
             <Route path={'/Usersignup'} component={UserSignup} />
             <Route path={'/dashboard'} component={Deshboard}  />
+            <Route path={'/ressignup'} component={ResSignup}  />
+            <Route path={'/reslogin'} component={ResLogin}  />
           </Switch>
 
     </Router>

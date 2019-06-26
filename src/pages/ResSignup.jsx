@@ -1,26 +1,16 @@
-import React, {Component, useState} from 'react';
-import {Grid,CssBaseline} from '@material-ui/core'
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import image from './edgar-castrejon-1SPu0KT-Ejg-unsplash.jpg';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+import React, {useState} from 'react';
+import {CssBaseline, Grid} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import image from "./res1.jpg";
 
-
-function UserSignup() {
+function ResSignup()  {
         const classes=Style();
     const [email,setEmail] = useState('');
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -28,21 +18,21 @@ function UserSignup() {
             <Grid  container component={'main'}  className={classes.root} >
                 <CssBaseline/>
                 <Grid item xs={false} sm={4} md={7} className={classes.image}  />
-               <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
+                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square >
                     <div  className={classes.paper}>
                         <Avatar className={classes.avatar}>
                             <LockOutlinedIcon/>
                         </Avatar>
                         <Typography  component={'h1'} variant={"h5"}>
-                            Sign in
+                            Sign Up
                         </Typography>
                         <form className={classes.form} noValidate  >
                             <TextField variant={'outlined'}
                                        margin={'normal'}
-                                       required id="fullname"
+                                       required id="restaurantName"
                                        fullWidth
-                                       label="Full name"
-                                       name="Full name"
+                                       label="Restaurant name"
+                                       name="restaurant name"
                                        autoComplete="name"
                                        autoFocus/>
                             <TextField variant={'outlined'}
@@ -56,36 +46,15 @@ function UserSignup() {
                                        name="email"
                                        autoComplete="email"
                                        autoFocus/>
+                            <TextField variant={'outlined'}
+                                       margin={'normal'}
+                                       required id="certificate"
+                                       fullWidth
+                                       label="Certificate "
+                                       name="certificate "
+                                       autoFocus/>
                             <Grid container >
-
-                                <Grid item xs style={{marginLeft:3}}>
-                                    <TextField variant={'outlined'}
-                                               margin={'normal'}
-                                               required id="age"
-                                               fullWidth
-                                               label="Age"
-                                               name="age"
-                                               autoFocus/>
-                                </Grid>
-                                <Grid item  xs >
-                                    <FormControl fullWidth className={classes.formcontrol}>
-                                        <InputLabel htmlFor="gender-helper">Gender</InputLabel>
-                                        <Select
-                                            input={<Input name="Gender" id="gender-helper" />}
-                                        >
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem >Male</MenuItem>
-                                            <MenuItem >Female</MenuItem>
-                                            <MenuItem >Other</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                            <Grid container >
-                                <Grid item  xs >
-                                    <Grid item xs >
+                                    <Grid item sm >
                                         <TextField variant={'outlined'}
                                                    margin={'normal'}
                                                    required id="country"
@@ -94,8 +63,7 @@ function UserSignup() {
                                                    name="counter"
                                                    autoFocus/>
                                     </Grid>
-                                </Grid>
-                                <Grid item xs style={{marginLeft:3}}>
+                                <Grid item  sm style={{marginLeft:3}}>
                                     <TextField variant={'outlined'}
                                                margin={'normal'}
                                                required id="city"
@@ -122,7 +90,7 @@ function UserSignup() {
                                 variant="contained"
                                 color="primary"
                                 className={classes.submit}
-                            >Sign In</Button>
+                            >Sign Up</Button>
                             <Grid container >
                                 <Grid item>
                                     <Link href="#" variant="body2">
@@ -132,7 +100,7 @@ function UserSignup() {
                             </Grid>
                         </form>
                     </div>
-               </Grid>
+                </Grid>
             </Grid>
         );
 }
@@ -162,12 +130,9 @@ const Style=makeStyles(theme=>({
     },
     submit:{
         margin:theme.spacing(3,0,2)
-    },
-    formcontrol:{
-        margin:theme.spacing(1),
     }
 
 
 }));
 
-export default UserSignup;
+export default ResSignup;
